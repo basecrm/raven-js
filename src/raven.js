@@ -55,6 +55,7 @@ function Raven() {
         collectWindowErrors: true,
         maxMessageLength: 0,
         stackTraceLimit: 50,
+        noDefaultIgnoreErrors: false,
         autoBreadcrumbs: true
     };
     this._ignoreOnError = 0;
@@ -129,13 +130,15 @@ Raven.prototype = {
 
         this._dsn = dsn;
 
-        // "Script error." is hard coded into browsers for errors that it can't read.
-        // this is the result of a script being pulled in from an external domain and CORS.
-        this._globalOptions.ignoreErrors.push(/^Script error\.?$/);
-        this._globalOptions.ignoreErrors.push(/^Javascript error: Script error\.? on line 0$/);
+        if (!this._globalOptions.noDefaultIgnoreErrors) {
+          // "Script error." is hard coded into browsers for errors that it can't read.
+          // this is the result of a script being pulled in from an external domain and CORS.
+          this._globalOptions.ignoreErrors.push(/^Script error\.?$/);
+          this._globalOptions.ignoreErrors.push(/^Javascript error: Script error\.? on line 0$/);
+        }
 
         // join regexp rules into one big rule
-        this._globalOptions.ignoreErrors = joinRegExp(this._globalOptions.ignoreErrors);
+        this._globalOptions.ignoreErrors = this._globalOptions.ignoreErrors.length ? joinRegExp(this._globalOptions.ignoreErrors) : false;
         this._globalOptions.ignoreUrls = this._globalOptions.ignoreUrls.length ? joinRegExp(this._globalOptions.ignoreUrls) : false;
         this._globalOptions.whitelistUrls = this._globalOptions.whitelistUrls.length ? joinRegExp(this._globalOptions.whitelistUrls) : false;
         this._globalOptions.includePaths = joinRegExp(this._globalOptions.includePaths);
