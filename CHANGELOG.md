@@ -1,8 +1,9 @@
 # Changelog
 
-## 3.7.1
-* CHANGE: Record fetch requests breadcrumbs and input from contentEditable targets
-* BUGFIX: Updated typings
+## 3.8.0
+* NEW: Record fetch request breadcrumbs. See: https://github.com/getsentry/raven-js/pull/744
+* NEW: Record contentEditable input event breadcrumbs. See: https://github.com/getsentry/raven-js/pull/748
+* BUGFIX: Updated Typescript declaration file. See: https://github.com/getsentry/raven-js/pull/746
 
 ## 3.7.0
 * BUGFIX: Add missing return types from TypeScript declaration file. See: https://github.com/getsentry/raven-js/pull/718
