@@ -1,4 +1,4 @@
-/*! Raven.js 3.5.1 (bef9fa7) | github.com/getsentry/raven-js */
+/*! Raven.js 3.8.0 (d78f15c) | github.com/getsentry/raven-js */
 
 /*
  * Includes TraceKit
